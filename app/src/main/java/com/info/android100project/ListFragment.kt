@@ -7,18 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.info.android100project.databinding.FragmentListBinding
+import com.info.android100project.listener.UserClickListener
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(),UserClickListener {
 
     private lateinit var usrName:EditText
     private lateinit var usrSurname:EditText
 
+    private lateinit var userAge:EditText
+
+    private var lastId = 0L
+
     private val usersAdapter by lazy {
 
-        UsersAdapter()
+        //burda tapammiramki userin icine ne gonderim?
+        UsersAdapter(this)
 
     }
 
@@ -35,11 +43,17 @@ class ListFragment : Fragment() {
 
         usrName = binding.edtTxtName
         usrSurname = binding.edtTxtSurname
+        userAge = binding.etUserAge
+//        lastCreatedUserId = binding
 
-        binding.recItems.adapter = usersAdapter
+        var adapter = usersAdapter
+
+        binding.recItems.adapter = adapter
         binding.recItems.layoutManager = LinearLayoutManager(context)
 
         usersAdapter.updateList(list)
+
+
 
         binding.btnAdd.setOnClickListener {
 
@@ -49,7 +63,7 @@ class ListFragment : Fragment() {
             ad.setMessage("elave olunsunmu?")
             ad.setPositiveButton("Beli"){View,dialogInterface ->
 
-                usersAdapter.addItem(Users(usrName.text.toString(),usrSurname.text.toString()))
+                usersAdapter.addItem(Users(lastId++,usrName.text.toString(),usrSurname.text.toString(),userAge.text.toString().toInt()))
 
             }
 
@@ -66,6 +80,16 @@ class ListFragment : Fragment() {
         // Inflate the layout for this fragment
         return binding.root
     }
+
+    override fun onClick(user: Users) {
+        findNavController().navigate(ListFragmentDirections.listToDetailsfrgmnt(user))
+//        arguments = Bundle().apply {
+//            putSerializable("user",user)
+//        }
+    }
+
+
+
 
 
 }

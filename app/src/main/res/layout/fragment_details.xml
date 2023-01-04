@@ -3,12 +3,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsFragment">
+    tools:context=".DetailsFragment"
+    android:padding="30dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/person_24"
+        android:layout_gravity="center_horizontal"/>
+
     <TextView
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textAllCaps="false"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center"
+        android:text="@string/huseyn"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/surname"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="40dp"
+        />
+
+    <TextView
+        android:id="@+id/txt_surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rzaguliyev"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_vertical|center"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/age"
+        android:textAllCaps="false"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="80dp"/>
+
+    <TextView
+        android:id="@+id/txt_age"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_21"
+        android:textAllCaps="false"
+        android:layout_gravity="center_vertical|center"
+        android:layout_marginTop="80dp"/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/id"
+        android:textAllCaps="false"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="120dp"/>
+
+    <TextView
+        android:id="@+id/txtId"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_5"
+        android:textAllCaps="false"
+        android:layout_gravity="center_vertical|center"
+        android:layout_marginTop="120dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_back"
+        android:textStyle="bold"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="@string/back_to_main"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:backgroundTint="#5AB142"/>
 
 </FrameLayout>
