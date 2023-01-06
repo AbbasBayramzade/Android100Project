@@ -88,8 +88,4 @@ class ListFragment : Fragment(),UserClickListener {
 //        }
     }
 
-
-
-
-
 }

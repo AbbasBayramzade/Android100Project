@@ -1,9 +1,17 @@
 package com.info.android100project
 
+import android.text.Html
+import android.text.SpannableStringBuilder
+import android.text.SpannedString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
+import androidx.core.text.color
+import androidx.core.text.italic
 import androidx.recyclerview.widget.RecyclerView
 import com.info.android100project.databinding.ListItemBinding
 import com.info.android100project.listener.UserClickListener
@@ -44,10 +52,13 @@ class UsersAdapter(private val userClickListener: UserClickListener):RecyclerVie
 
         holder.binding.apply {
 
-            txtusername.text = item.name
-            txtusername.text = item.surname
-            txtItemAge.text = item.age.toString()
-            txtItemId.text = item.id.toString()
+            txtname.text = "Ad: ${item.name}"
+            txtusername.text = "Soyad: ${item.surname}"
+
+            val s = "Yaş: <b>${item.age} </b>"
+
+            txtItemAge.text = HtmlCompat.fromHtml(s,HtmlCompat.FROM_HTML_MODE_LEGACY)
+            txtItemId.text = "id: ${item.id.toString()}"
 
         }
 
