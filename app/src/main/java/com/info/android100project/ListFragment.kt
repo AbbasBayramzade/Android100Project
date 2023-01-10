@@ -32,7 +32,7 @@ class ListFragment : Fragment(),UserClickListener {
 
     var list = arrayListOf<Users>()
 
-    private lateinit var binding: FragmentListBinding
+    private lateinit var binding: com.info.android100project.databinding.FragmentListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
