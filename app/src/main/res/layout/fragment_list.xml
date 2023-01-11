@@ -28,16 +28,27 @@
             app:layout_constraintBottom_toTopOf="@id/btn_add"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="5dp"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.33"/>
 
         <EditText
             android:layout_margin="5dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.33"
             android:id="@+id/edt_txt_surname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/btn_add"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <EditText
+            android:id="@+id/edt_txt_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/btn_add"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.33"/>
+
+
 
     </LinearLayout>
 

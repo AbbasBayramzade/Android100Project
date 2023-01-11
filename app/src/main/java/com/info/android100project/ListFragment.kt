@@ -10,21 +10,27 @@ import android.widget.EditText
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.info.android100project.databinding.FragmentListBinding
+import com.info.android100project.dialog.AddDialogClickListener
+import com.info.android100project.dialog.AddDialogFragment
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), AddDialogClickListener {
 
-    private lateinit var usrName:EditText
+    /*private lateinit var usrName:EditText
     private lateinit var usrSurname:EditText
+    private lateinit var usrAge:EditText
 
     private val usersAdapter by lazy {
 
         UsersAdapter()
 
-    }
+    }*/
 
-    var list = arrayListOf<Users>()
+    lateinit var binding:FragmentListBinding
 
-    private lateinit var binding: FragmentListBinding
+    var lastId = 0L
+
+    private lateinit var addDialogF: AddDialogFragment
+    private lateinit var adapter:UsersAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,38 +39,44 @@ class ListFragment : Fragment() {
 
         binding = FragmentListBinding.inflate(inflater,container,false)
 
-        usrName = binding.edtTxtName
-        usrSurname = binding.edtTxtSurname
+        adapter = UsersAdapter(arrayListOf())
 
-        binding.recItems.adapter = usersAdapter
-        binding.recItems.layoutManager = LinearLayoutManager(context)
+        adapter.onItemClick = {
 
-        usersAdapter.updateList(list)
+            val action = ListFragmentDirections.listToDetailsfrgmnt()
+            findNavController().navigate(action)
+
+        }
+
+        binding.recItems.adapter = adapter
+        binding.recItems.apply {
+
+            adapter = this@ListFragment.adapter
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+
+        }
 
         binding.btnAdd.setOnClickListener {
 
-            val ad = AlertDialog.Builder(binding.root.context, androidx.transition.R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
-            ad.setTitle("Bu sexs siyahiya elave olunacaq")
-            ad.setIcon(R.drawable.logo)
-            ad.setMessage("elave olunsunmu?")
-            ad.setPositiveButton("Beli"){View,dialogInterface ->
+            val args = Bundle()
 
-                usersAdapter.addItem(Users(usrName.text.toString(),usrSurname.text.toString()))
-
-            }
-
-            ad.setNegativeButton("Xeyr"){View,dialogInterface ->
-                findNavController().popBackStack()
-            }
-
-            ad.setCancelable(false)
-            ad.create().show()
+            args.putSerializable("AddDialogClickListener",this)
+            addDialogF = AddDialogFragment()
+            addDialogF.arguments = args
+            addDialogF.show(childFragmentManager,"AddDialog")
 
 //
         }
 
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    override fun onAddClick(user: Users) {
+        adapter.addItem(user.also {
+            it.id = lastId++
+        })
     }
 
 

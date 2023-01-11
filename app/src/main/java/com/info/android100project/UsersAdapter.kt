@@ -5,46 +5,58 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.info.android100project.databinding.ListItemBinding
 
-class UsersAdapter:RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
+class UsersAdapter(private var userList:ArrayList<Users>):RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
-    var myList = arrayListOf<Users>()
+    var onItemClick:((Users) ->Unit)? = null
 
-    inner class ViewHolder(v:View):RecyclerView.ViewHolder(v){
+    inner class ViewHolder(val holderBinding: ListItemBinding):RecyclerView.ViewHolder(holderBinding.root){
 
-       val userName = v.findViewById<TextView>(R.id.txtname)
-        val userSurname = v.findViewById<TextView>(R.id.txtusername)
+        /* val userName = v.findViewById<TextView>(R.id.txtname)
+          val userSurname = v.findViewById<TextView>(R.id.txtusername)
+          val userID = v.findViewById<TextView>(R.id.txtuserId)*/
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return  ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item,parent,false))
+        return  ViewHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var user = userList[position]
+        holder.holderBinding.also {
 
-        holder.apply {
+            it.txtuserId.text = user.id.toString()
+            it.txtname.text = user.name
+            it.txtusername.text = user.surname
+            it.txtuserage.text = user.age.toString()
 
-            userName.text = myList[position].name
-            userSurname.text = myList[position].surname
+        }
+
+        holder.itemView.setOnClickListener {
+
+            onItemClick?.invoke(user)
 
         }
 
     }
 
     override fun getItemCount(): Int {
-        return myList.size
+        return userList.size
     }
 
     fun updateList(list: ArrayList<Users>){
 
-        this.myList = list
+        this.userList = list
+
+        notifyDataSetChanged()
 
     }
 
     fun addItem(newUser:Users){
-        myList.add(newUser)
-        notifyItemInserted(myList.size - 1)
+        userList.add(newUser)
+        notifyItemInserted(userList.size - 1)
     }
 
 }
